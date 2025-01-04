@@ -34,36 +34,33 @@ namespace WebApplication1.Repositories
 
         public async Task<ProjectModels> Update(ProjectModels project, int id)
         {
-            ProjectModels projectById = await GetById(id);
+            var projectById = await GetById(id);
 
-            if (projectById == null)
+            if (projectById != null)
             {
-                throw new Exception($"Projeto com ID: {id} não foi encontrado na base de dados.");
+                projectById.Title = project.Title;
+                projectById.Description = project.Description;
+                projectById.Link = project.Link;
+
+                _dbContext.Update(projectById);
+                await _dbContext.SaveChangesAsync();
             }
-
-            projectById.Title = project.Title;
-            projectById.Description = project.Description;
-            projectById.Link = project.Link;
-
-            _dbContext.Update(projectById);
-            await _dbContext.SaveChangesAsync();
 
             return projectById;
         }
 
         public async Task<bool> Delete(int id)
         {
-            ProjectModels projectById = await GetById(id);
+            var projectById = await GetById(id);
 
-            if (projectById == null)
+            if (projectById != null)
             {
-                throw new Exception($"Projeto com ID: {id} não foi encontrado na base de dados.");
+                _dbContext.Projects.Remove(projectById);
+                await _dbContext.SaveChangesAsync();
+                return true;
             }
 
-            _dbContext.Projects.Remove(projectById);
-            await _dbContext.SaveChangesAsync();
-
-            return true;
+            return false;
         }
     }
 }

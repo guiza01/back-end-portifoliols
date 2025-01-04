@@ -34,34 +34,30 @@ namespace WebApplication1.Repositories
 
         public async Task<PlatformModels> Update(PlatformModels platform, int id)
         {
-            PlatformModels platformById = await GetById(id);
+            var platformById = await GetById(id);
 
-            if (platformById == null)
+            if (platformById != null)
             {
-                throw new Exception($"Plataforma com ID: {id} não foi encontrado na base de dados.");
+                platformById.Name = platform.Name;
+                _dbContext.Update(platformById);
+                await _dbContext.SaveChangesAsync();
             }
-
-            platformById.Name = platform.Name;
-
-            _dbContext.Update(platformById);
-            await _dbContext.SaveChangesAsync();
 
             return platformById;
         }
 
         public async Task<bool> Delete(int id)
         {
-            PlatformModels platformById = await GetById(id);
+            var platformById = await GetById(id);
 
-            if (platformById == null)
+            if (platformById != null)
             {
-                throw new Exception($"Plataforma com ID: {id} não foi encontrado na base de dados.");
+                _dbContext.Platforms.Remove(platformById);
+                await _dbContext.SaveChangesAsync();
+                return true;
             }
 
-            _dbContext.Platforms.Remove(platformById);
-            await _dbContext.SaveChangesAsync();
-
-            return true;
+            return false;
         }
     }
 }

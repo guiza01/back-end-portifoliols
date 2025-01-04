@@ -34,34 +34,30 @@ namespace WebApplication1.Repositories
 
         public async Task<LanguageModels> Update(LanguageModels language, int id)
         {
-            LanguageModels languageById = await GetById(id);
+            var languageById = await GetById(id);
 
-            if (languageById == null)
+            if (languageById != null)
             {
-                throw new Exception($"Linguagem com ID: {id} não foi encontrado na base de dados.");
+                languageById.Name = language.Name;
+                _dbContext.Update(languageById);
+                await _dbContext.SaveChangesAsync();
             }
-
-            languageById.Name = language.Name;
-
-            _dbContext.Update(languageById);
-            await _dbContext.SaveChangesAsync();
 
             return languageById;
         }
 
         public async Task<bool> Delete(int id)
         {
-            LanguageModels languageById = await GetById(id);
+            var languageById = await GetById(id);
 
-            if (languageById == null)
+            if (languageById != null)
             {
-                throw new Exception($"Linguagem com ID: {id} não foi encontrado na base de dados.");
+                _dbContext.Languages.Remove(languageById);
+                await _dbContext.SaveChangesAsync();
+                return true;
             }
 
-            _dbContext.Languages.Remove(languageById);
-            await _dbContext.SaveChangesAsync();
-
-            return true;
+            return false;
         }
     }
 }

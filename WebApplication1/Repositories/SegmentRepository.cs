@@ -34,34 +34,31 @@ namespace WebApplication1.Repositories
 
         public async Task<SegmentModels> Update(SegmentModels segment, int id)
         {
-            SegmentModels segmentById = await GetById(id);
+            var segmentById = await GetById(id);
 
-            if (segmentById == null)
+            if (segmentById != null)
             {
-                throw new Exception($"Segmento com ID: {id} não foi encontrado na base de dados.");
+                segmentById.Name = segment.Name;
+
+                _dbContext.Update(segmentById);
+                await _dbContext.SaveChangesAsync();
             }
-
-            segmentById.Name = segment.Name;
-
-            _dbContext.Update(segmentById);
-            await _dbContext.SaveChangesAsync();
 
             return segmentById;
         }
 
         public async Task<bool> Delete(int id)
         {
-            SegmentModels segmentById = await GetById(id);
+            var segmentById = await GetById(id);
 
-            if (segmentById == null)
+            if (segmentById != null)
             {
-                throw new Exception($"Segmento com ID: {id} não foi encontrado na base de dados.");
+                _dbContext.Segments.Remove(segmentById);
+                await _dbContext.SaveChangesAsync();
+                return true;
             }
 
-            _dbContext.Segments.Remove(segmentById);
-            await _dbContext.SaveChangesAsync();
-
-            return true;
+            return false;
         }
     }
 }
