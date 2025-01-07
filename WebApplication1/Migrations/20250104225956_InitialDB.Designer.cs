@@ -11,7 +11,7 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ProjectPortfolioDBContext))]
-    [Migration("20250103112808_InitialDB")]
+    [Migration("20250104225956_InitialDB")]
     partial class InitialDB
     {
         /// <inheritdoc />
@@ -50,9 +50,6 @@ namespace WebApplication1.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
                     b.HasKey("LanguageId", "ProjectId");
 
                     b.HasIndex("ProjectId");
@@ -84,9 +81,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
                     b.HasKey("PlatformId", "ProjectId");
@@ -147,9 +141,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
                     b.HasKey("SegmentId", "ProjectId");
