@@ -70,8 +70,7 @@ namespace WebApplication1.Migrations
                 columns: table => new
                 {
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    LanguageId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    LanguageId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,8 +94,7 @@ namespace WebApplication1.Migrations
                 columns: table => new
                 {
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    PlatformId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    PlatformId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,8 +118,7 @@ namespace WebApplication1.Migrations
                 columns: table => new
                 {
                     ProjectId = table.Column<int>(type: "integer", nullable: false),
-                    SegmentId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    SegmentId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

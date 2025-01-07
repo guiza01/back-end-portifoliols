@@ -47,9 +47,6 @@ namespace WebApplication1.Migrations
                     b.Property<int>("ProjectId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
-
                     b.HasKey("LanguageId", "ProjectId");
 
                     b.HasIndex("ProjectId");
@@ -81,9 +78,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
                     b.HasKey("PlatformId", "ProjectId");
@@ -144,9 +138,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
                     b.HasKey("SegmentId", "ProjectId");
